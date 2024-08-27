@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = Scheduler.Persistence
+build_property.ProjectDir = /Users/phuphan/Yokogawa/Asset Tenant/scheduler-service/src/Scheduler.Persistence/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

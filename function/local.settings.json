@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "ASPNETCORE_ENVIRONMENT": "Development",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=ahstest01datasea01sa;AccountKey=U0tCR7mIuElAlxOHiZu/Rp85Kqe7Lt0mBjixxyJXC0KGNojIlCG5gL1Uu6qeLvH/jv3ISKMM70ba+ASt70l/PA==;EndpointSuffix=core.windows.net",
+    "ConnectionStrings__Default": "User ID=postgres;Password=Pass1234!;Host=127.0.0.1;Port=5432;Database=scheduler;Pooling=true"
+  }
+}

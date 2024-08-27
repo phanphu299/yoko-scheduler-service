@@ -1,0 +1,2153 @@
+{
+	"info": {
+		"_postman_id": "65eb1947-6469-4ffa-bcd6-8a3ca342a045",
+		"name": "Scheduler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19873024",
+		"_collection_link": "https://yokogawa-dev.postman.co/workspace/Team-Workspace~da693672-e784-4eab-8648-ea46030cbbf0/collection/19873024-65eb1947-6469-4ffa-bcd6-8a3ca342a045?action=share&source=collection_link&creator=19873024"
+	},
+	"item": [
+		{
+			"name": "Setup",
+			"item": [
+				{
+					"name": "001_Authentication",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get access token success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Get access token has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('access_token');\r",
+									"    pm.environment.set(\"access_token\", jsonData.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{sa_client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{sa_client_secret}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{idp}}/connect/token",
+							"host": [
+								"{{idp}}"
+							],
+							"path": [
+								"connect",
+								"token"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "{{sa_client_id}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{sa_client_secret}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{idp}}/connect/token",
+									"host": [
+										"{{idp}}"
+									],
+									"path": [
+										"connect",
+										"token"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IkNGQjcwQTIyQUExMTM3RjRENUNFQzIzODlBODUxM0NGQTZFQTI0MzkiLCJ0eXAiOiJhdCtqd3QiLCJ4NXQiOiJ6N2NLSXFvUk5fVFZ6c0k0bW9VVHo2YnFKRGsifQ.eyJuYmYiOjE2OTY4MTg0NjAsImV4cCI6MTY5NjgyMjA2MCwiaXNzIjoiaWRwIiwiYXVkIjpbImFsYXJtLWRhdGEiLCJhc3NldC1kYXRhIiwiYXNzZXQtbWVkaWEtZGF0YSIsImFzc2V0LXRhYmxlLWRhdGEiLCJhc3NldDNkLWRhdGEiLCJhdWRpdC1kYXRhIiwiYm9va21hcmstZGF0YSIsImJyb2tlci1kYXRhIiwiY2xpZW50LWRhdGEiLCJjb25maWctZGF0YSIsImRhc2hib2FyZC1kYXRhIiwiZGF0YS1mb3J3YXJkaW5nLWRhdGEiLCJkYXRhc2V0LWRhdGEiLCJlbnRpdHktZGF0YSIsImV2ZW50LWRhdGEiLCJsb2NhbGl6YXRpb24tZGF0YSIsIm1hc3Rlci1kYXRhIiwibW9kZWwtZGF0YSIsIm5vdGlmaWNhdGlvbi1kYXRhIiwicHJvamVjdC1kYXRhIiwicmVwb3J0aW5nLWRhdGEiLCJyb2xlLWRhdGEiLCJzY2hlZHVsZXItZGF0YSIsInN0b3JhZ2UtZGF0YSIsInRlbmFudC1kYXRhIiwidHJhaW5pbmctZGF0YSIsInVzZXItZGF0YSJdLCJjbGllbnRfaWQiOiJwb3N0bWFuLXNhIiwidGVuYW50SWQiOiIwNzc5NDMzZS1mMzZiLTE0MTAtODY1MC0wMGY5MTMxMzM0OGMiLCJzdWJUZW5hbnRJZCI6IjBlNzk0MzNlLWYzNmItMTQxMC04NjUwLTAwZjkxMzEzMzQ4YyIsInN1YnNjcmlwdGlvbklkIjoiMGU3OTQzM2UtZjM2Yi0xNDEwLTg2NTAtMDBmOTEzMTMzNDhjIiwicHJvamVjdElkIjoiMzRlNWVlNjItNDI5Yy00NzI0LWIzZDAtMzg5MWJkMGEwOGM5IiwidXBuIjoidGhhbmgudHJhbkB5b2tvZ2F3YS5jb20iLCJhbGxvd0hlYWRlciI6InRydWUiLCJqdGkiOiJPRjE2R0IyMDhWWTBRdkxyRWVjV1lnIiwic2NvcGUiOlsiYWxhcm0tZGF0YSIsImFzc2V0LWRhdGEiLCJhc3NldC1tZWRpYS1kYXRhIiwiYXNzZXQtdGFibGUtZGF0YSIsImFzc2V0M2QtZGF0YSIsImF1ZGl0LWRhdGEiLCJib29rbWFyay1kYXRhIiwiYnJva2VyLWRhdGEiLCJjbGllbnQtZGF0YSIsImNvbmZpZy1kYXRhIiwiZGFzaGJvYXJkLWRhdGEiLCJkYXRhLWZvcndhcmRpbmctZGF0YSIsImRhdGFzZXQtZGF0YSIsImVudGl0eS1kYXRhIiwiZXZlbnQtZGF0YSIsImxvY2FsaXphdGlvbi1kYXRhIiwibWFzdGVyLWRhdGEiLCJtb2RlbC1kYXRhIiwibm90aWZpY2F0aW9uLWRhdGEiLCJwcm9qZWN0LWRhdGEiLCJyZXBvcnRpbmctZGF0YSIsInJvbGUtZGF0YSIsInNjaGVkdWxlci1kYXRhIiwic3RvcmFnZS1kYXRhIiwidGVuYW50LWRhdGEiLCJ0cmFpbmluZy1kYXRhIiwidXNlci1kYXRhIl19.n9fZhMrGPosOxsj4Cv8K6irKQuVFfTEfx0kZrO_71FUEac1VGa7MK0tgCIV0zrTjpZX_xKCyu0fh_RrJwOPG6WmHpPyI4x55qZqyrnyiXNYCFRNC4i8PR9wVwM4trmTlXJg1ZsMNWGV-xcWxcqry43Hs3PFR-_G-pKCEoEiF-grIJDKKP_tT8mHt324Eb_JzgWhgHrs7PzuPTOeN4cjXf0CFMHRKv9909iol_hw_wqW3Veg2RY31t_M-MHVYJHP7z6esqHqsaKwJVKCZSUFKMLcwMX3DzHM1FG0Z7BSAkclvSBLKrD_Q2_xXddRuJrXLNyQAGARiefvtxs3UzsGsWQ\",\r\n    \"expires_in\": 3600,\r\n    \"token_type\": \"Bearer\",\r\n    \"scope\": \"alarm-data asset-data asset-media-data asset-table-data asset3d-data audit-data bookmark-data broker-data client-data config-data dashboard-data data-forwarding-data dataset-data entity-data event-data localization-data master-data model-data notification-data profile project-data reporting-data role-data scheduler-data storage-data tenant-data training-data user-data\"\r\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cron Expressions",
+			"item": [
+				{
+					"name": "Search Cron Expressions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Search Cron Expressions success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Search Cron Expressions has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.totalCount).to.be.above(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pageIndex\": 0,\r\n    \"pageSize\": 20,\r\n    \"clientOverride\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/cronexpressions/search",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"cronexpressions",
+								"search"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"pageIndex\": 0,\r\n    \"pageSize\": 20,\r\n    \"clientOverride\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/cronexpressions/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"cronexpressions",
+										"search"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"durationInMilisecond\": 60,\r\n    \"totalCount\": 21,\r\n    \"totalPage\": 2,\r\n    \"pageSize\": 20,\r\n    \"pageIndex\": 0,\r\n    \"clientOverride\": false,\r\n    \"data\": [\r\n        {\r\n            \"id\": \"2af23155-6f0f-4a1f-9778-78923cc6a79f\",\r\n            \"code\": \"2_seconds\",\r\n            \"name\": \"Every 2 seconds\",\r\n            \"cron\": \"0/2 * * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"e396344c-e4e4-4935-87c4-dbbc9c578f81\",\r\n            \"code\": \"5_seconds\",\r\n            \"name\": \"Every 5 seconds\",\r\n            \"cron\": \"0/5 * * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"5c9f3545-607f-491b-9138-1db63e769435\",\r\n            \"code\": \"10_seconds\",\r\n            \"name\": \"Every 10 seconds\",\r\n            \"cron\": \"0/10 * * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"0e92fe96-ef20-4de1-82be-f8a17e739ebf\",\r\n            \"code\": \"15_seconds\",\r\n            \"name\": \"Every 15 seconds\",\r\n            \"cron\": \"0/15 * * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"c3842885-3f22-4801-b805-b4bb01a43e78\",\r\n            \"code\": \"30_seconds\",\r\n            \"name\": \"Every 30 seconds\",\r\n            \"cron\": \"0/30 * * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"c704dd1a-b4c9-4997-858f-cbbf6251218b\",\r\n            \"code\": \"1_minute\",\r\n            \"name\": \"Every minute\",\r\n            \"cron\": \"0 */1 * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"eb6d2027-25c2-4fce-ba60-eabea6404324\",\r\n            \"code\": \"2_minutes\",\r\n            \"name\": \"Every 2 minutes\",\r\n            \"cron\": \"0 */2 * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"036abf77-10ad-4ba0-8713-25b2b5edc461\",\r\n            \"code\": \"5_minutes\",\r\n            \"name\": \"Every 5 minutes\",\r\n            \"cron\": \"0 */5 * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"56be89bd-dc0d-44be-b0d5-3550614beecf\",\r\n            \"code\": \"10_minutes\",\r\n            \"name\": \"Every 10 minutes\",\r\n            \"cron\": \"0 */10 * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"3750199b-0571-4b02-800f-cbe50be3b2da\",\r\n            \"code\": \"15_minutes\",\r\n            \"name\": \"Every 15 minutes\",\r\n            \"cron\": \"0 */15 * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"571ed27f-e8b1-49d6-9aeb-07db46c78ec4\",\r\n            \"code\": \"30_minutes\",\r\n            \"name\": \"Every 30 minutes\",\r\n            \"cron\": \"0 */30 * * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"d6410333-01d1-4653-a6a0-113d62aea27a\",\r\n            \"code\": \"1_hour\",\r\n            \"name\": \"Every hour\",\r\n            \"cron\": \"0 0 */1 * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"dd116449-54d5-43ad-a20e-46ff1244792a\",\r\n            \"code\": \"2_hours\",\r\n            \"name\": \"Every 2 hours\",\r\n            \"cron\": \"0 0 */2 * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"923d3048-069b-41bb-addb-faea406100ab\",\r\n            \"code\": \"5_hours\",\r\n            \"name\": \"Every 5 hours\",\r\n            \"cron\": \"0 0 */5 * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"da003aa4-b478-40df-bdfa-e231386602e3\",\r\n            \"code\": \"10_hours\",\r\n            \"name\": \"Every 10 hours\",\r\n            \"cron\": \"0 0 */10 * * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"8df1a4f8-13c1-486e-bda7-4fa8c85baa9c\",\r\n            \"code\": \"1_day\",\r\n            \"name\": \"At 12:00 AM\",\r\n            \"cron\": \"0 0 0 */1 * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"24ebb499-37f7-48c6-9f8a-2b5503efb8a0\",\r\n            \"code\": \"2_days\",\r\n            \"name\": \"At 12:00 AM, every 2 days\",\r\n            \"cron\": \"0 0 0 */2 * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"c6291893-cc28-42a2-821e-1fc1833cb153\",\r\n            \"code\": \"5_days\",\r\n            \"name\": \"At 12:00 AM, every 5 days\",\r\n            \"cron\": \"0 0 0 */5 * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"c2831534-9d39-4263-8911-95f0767fe14a\",\r\n            \"code\": \"1_week\",\r\n            \"name\": \"At 12:00 AM, only on Sunday\",\r\n            \"cron\": \"0 0 0 ? * SUN\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        },\r\n        {\r\n            \"id\": \"5f137b8b-d1bd-43db-a665-d94a80c13cd3\",\r\n            \"code\": \"1_month\",\r\n            \"name\": \"At 12:00 AM, on day 1 of the month\",\r\n            \"cron\": \"0 0 0 1 * ?\",\r\n            \"createdUtc\": \"2023-10-09T02:11:58:9449\",\r\n            \"updatedUtc\": \"2023-10-09T02:11:58:9449\"\r\n        }\r\n    ]\r\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Recurring/SchedulerBase=Cron/Delay",
+			"item": [
+				{
+					"name": "Create Job 1 (Timezone +0, Delay 1min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 1 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 1 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job1_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc().add(1, 'minutes');\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const start = startUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"key\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"*/30 * * * * ?\",\r\n    \"type\": \"delay\",\r\n    \"schedulerBase\": \"Cron\",\r\n    \"createdUtc\": \"2023-10-11T06:53:31:4088\",\r\n    \"updatedUtc\": \"2023-10-11T06:53:31:4089\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 1 (Not run yet)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 1 success\", function () {\r",
+									"    var jsonData = pm.response.responseSize > 0 ? pm.response.json() : {};\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"    pm.expect(jsonData).not.have.property(\"previousFireTimeUtc\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job1_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job1_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reponse",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Create Job 2 (Timezone +0, Delay 5sec)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 2 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 2 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job2_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc().add(5, 'seconds');\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const start = startUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/5 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"key\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"*/30 * * * * ?\",\r\n    \"type\": \"delay\",\r\n    \"schedulerBase\": \"Cron\",\r\n    \"createdUtc\": \"2023-10-11T06:53:31:4088\",\r\n    \"updatedUtc\": \"2023-10-11T06:53:31:4089\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 2 - First time (Not run yet)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 2 - First time success\", function () {\r",
+									"    var jsonData = pm.response.responseSize > 0 ? pm.response.json() : {};\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"    pm.expect(jsonData).not.have.property(\"previousFireTimeUtc\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job2_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job2_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Check Job 2 - Second time (Already run)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 2 - Second time success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 2 - Second time has response\", function () {\r",
+									"    pm.response.to.be.have.body;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 2 - Second time has valid value\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const startUtc = pm.environment.get(\"startUtc\");\r",
+									"\r",
+									"    console.log(\"startUtc: \", startUtc);\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property(\"previousFireTimeUtc\");\r",
+									"    pm.expect(jsonData.previousFireTimeUtc >= startUtc).eq(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 10000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job2_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job2_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"previousFireTimeUtc\": \"2023-10-09T05:24:00:0000\",\r\n    \"nextFireTimeUtc\": \"2023-10-09T05:24:30:0000\"\r\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Recurring/SchedulerBase=StartDate/Now",
+			"item": [
+				{
+					"name": "Create Job 3 (Timezone +0)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 3 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 3 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job3_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc();\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const start = startUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"startDate\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"cb3485de-e8df-42e9-bdaa-a1d59755d44c\",\r\n    \"key\": \"cb3485de-e8df-42e9-bdaa-a1d59755d44c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"19/30 * * * * ?\",\r\n    \"type\": \"recurring\",\r\n    \"schedulerBase\": \"StartDate\",\r\n    \"createdUtc\": \"2023-10-11T07:00:49:8341\",\r\n    \"updatedUtc\": \"2023-10-11T07:00:49:8341\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 3 (Already run)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 3 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 3 has response\", function () {\r",
+									"    pm.response.to.be.have.body;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 3 has valid value\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const startUtc = pm.environment.get(\"startUtc\");\r",
+									"\r",
+									"    console.log(\"startUtc: \", startUtc);\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property(\"previousFireTimeUtc\");\r",
+									"    pm.expect(jsonData.previousFireTimeUtc >= startUtc).eq(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 5000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job3_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job3_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"previousFireTimeUtc\": \"2023-10-09T05:24:00:0000\",\r\n    \"nextFireTimeUtc\": \"2023-10-09T05:24:30:0000\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Job 4 (Timezone +7)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 4 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 4 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job4_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc();\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const startLocal = moment().utc().add(7, 'hours');\r",
+									"const endLocal = moment().utc().add(1, 'days');\r",
+									"const start = startLocal.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endLocal.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"startDate\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"SE Asia Standard Time\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"cb3485de-e8df-42e9-bdaa-a1d59755d44c\",\r\n    \"key\": \"cb3485de-e8df-42e9-bdaa-a1d59755d44c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"19/30 * * * * ?\",\r\n    \"type\": \"recurring\",\r\n    \"schedulerBase\": \"StartDate\",\r\n    \"createdUtc\": \"2023-10-11T07:00:49:8341\",\r\n    \"updatedUtc\": \"2023-10-11T07:00:49:8341\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 4 (Already run)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 4 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 4 has response\", function () {\r",
+									"    pm.response.to.be.have.body;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 4 has valid value\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const startUtc = pm.environment.get(\"startUtc\");\r",
+									"\r",
+									"    console.log(\"startUtc: \", startUtc);\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property(\"previousFireTimeUtc\");\r",
+									"    pm.expect(jsonData.previousFireTimeUtc >= startUtc).eq(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 5000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job4_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job4_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"previousFireTimeUtc\": \"2023-10-09T05:24:00:0000\",\r\n    \"nextFireTimeUtc\": \"2023-10-09T05:24:30:0000\"\r\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Recurring/SchedulerBase=StartDate/Delay",
+			"item": [
+				{
+					"name": "Create Job 5 (Timezone +0, Delay 1min)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 5 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 5 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job5_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc().add(1, 'minutes');\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const start = startUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"startDate\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"cb3485de-e8df-42e9-bdaa-a1d59755d44c\",\r\n    \"key\": \"cb3485de-e8df-42e9-bdaa-a1d59755d44c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"19/30 * * * * ?\",\r\n    \"type\": \"recurring\",\r\n    \"schedulerBase\": \"StartDate\",\r\n    \"createdUtc\": \"2023-10-11T07:00:49:8341\",\r\n    \"updatedUtc\": \"2023-10-11T07:00:49:8341\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 5 (Not run yet)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 5 success\", function () {\r",
+									"    var jsonData = pm.response.responseSize > 0 ? pm.response.json() : {};\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"    pm.expect(jsonData).not.have.property(\"previousFireTimeUtc\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job5_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job5_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Reponse",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Create Job 6 (Timezone +0, Delay 5sec)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 6 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 6 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job6_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc().add(5, 'seconds');\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const start = startUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endUtc.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"startDate\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"key\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"*/30 * * * * ?\",\r\n    \"type\": \"delay\",\r\n    \"schedulerBase\": \"Cron\",\r\n    \"createdUtc\": \"2023-10-11T06:53:31:4088\",\r\n    \"updatedUtc\": \"2023-10-11T06:53:31:4089\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 6 - First time (Not run yet)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 6 - First time success\", function () {\r",
+									"    var jsonData = pm.response.responseSize > 0 ? pm.response.json() : {};\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"    pm.expect(jsonData).not.have.property(\"previousFireTimeUtc\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job6_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job6_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Check Job 6 - Second time (Already run)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 6 - Second time success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 6 - Second time has response\", function () {\r",
+									"    pm.response.to.be.have.body;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 6 - Second time has valid value\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const startUtc = pm.environment.get(\"startUtc\");\r",
+									"\r",
+									"    console.log(\"startUtc: \", startUtc);\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property(\"previousFireTimeUtc\");\r",
+									"    pm.expect(jsonData.previousFireTimeUtc >= startUtc).eq(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 5000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"startDate\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job6_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job6_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"previousFireTimeUtc\": \"2023-10-09T05:24:00:0000\",\r\n    \"nextFireTimeUtc\": \"2023-10-09T05:24:30:0000\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Job 7 (Timezone +7, Delay 5sec)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Create Job 7 success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Create Job 7 has response\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.environment.set(\"job7_id\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment');\r",
+									"const startUtc = moment().utc().add(5, 'seconds');\r",
+									"const endUtc = moment().utc().add(1, 'days');\r",
+									"const startLocal = moment().utc().add(7, 'hours').add(5, 'seconds');\r",
+									"const endLocal = moment().utc().add(1, 'days');\r",
+									"const start = startLocal.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"const end = endLocal.format(\"YYYY-MM-DD HH:mm:ss\");\r",
+									"\r",
+									"pm.environment.set('startUtc', startUtc);\r",
+									"pm.environment.set('endUtc', endUtc);\r",
+									"\r",
+									"pm.environment.set('start', start);\r",
+									"pm.environment.set('end', end);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"startDate\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"SE Asia Standard Time\",\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/sch/jobs/recurring",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"recurring"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"aa944285-3b53-4535-82ef-10cd5162bce5\",           \r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"schedulerBase\": \"cron\",\r\n    \"endpoint\": \"https://google.com\",\r\n    \"method\": \"POST\",\r\n    \"timeZoneName\": \"UTC\", // SE Asia Standard Time\r\n    \"start\": \"{{start}}\",\r\n    \"end\": \"{{end}}\",\r\n    \"additionalParams\": {\r\n\t    \"dateTimeFormat\": \"dd/MM/yyyy HH:mm:ss.fff\",\r\n        \"tenantId\": \"41959c6c-e9b2-4ec6-90b8-d9b8d0166664\",\r\n        \"subscriptionId\": \"285c4096-1d1a-4454-a1f8-69a3a4df669d\",\r\n        \"projectId\": \"aa944285-3b53-4535-82ef-10cd5162bce5\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/recurring",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"recurring"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"id\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"key\": \"bed1f16f-8779-42c1-b68a-a250c9e73c7c\",\r\n    \"cron\": \"*/30 * * * * ?\",\r\n    \"primaryCron\": \"*/30 * * * * ?\",\r\n    \"type\": \"delay\",\r\n    \"schedulerBase\": \"Cron\",\r\n    \"createdUtc\": \"2023-10-11T06:53:31:4088\",\r\n    \"updatedUtc\": \"2023-10-11T06:53:31:4089\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Job 7 - First time (Not run yet)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 7 - First time success\", function () {\r",
+									"    var jsonData = pm.response.responseSize > 0 ? pm.response.json() : {};\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);\r",
+									"    pm.expect(jsonData).not.have.property(\"previousFireTimeUtc\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 2000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job7_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job7_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Check Job 7 - Second time (Already run)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Job 7 - Second time success\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 7 - Second time has response\", function () {\r",
+									"    pm.response.to.be.have.body;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Job 7 - Second time has valid value\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const startUtc = pm.environment.get(\"startUtc\");\r",
+									"\r",
+									"    console.log(\"startUtc: \", startUtc);\r",
+									"    console.log(jsonData);\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property(\"previousFireTimeUtc\");\r",
+									"    // pm.expect(jsonData.previousFireTimeUtc >= startUtc).eq(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Wait for the job to run\r",
+									"setTimeout(function(){}, 5000);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/sch/jobs/{{job6_id}}/execution",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"sch",
+								"jobs",
+								"{{job6_id}}",
+								"execution"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\": \"{{job_key}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sch/jobs/trigger",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sch",
+										"jobs",
+										"trigger"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"previousFireTimeUtc\": \"2023-10-09T05:24:00:0000\",\r\n    \"nextFireTimeUtc\": \"2023-10-09T05:24:30:0000\"\r\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

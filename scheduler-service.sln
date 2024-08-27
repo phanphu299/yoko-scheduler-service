@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FD0F5431-8007-4EFC-972C-FC1BDFA4C7A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler.Api", "src\Scheduler.Api\Scheduler.Api.csproj", "{77D75B49-300A-4317-91A4-50D341591036}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler.Application", "src\Scheduler.Application\Scheduler.Application.csproj", "{A6293CC0-FE49-44CB-A63A-D439E3DA0F4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler.Domain", "src\Scheduler.Domain\Scheduler.Domain.csproj", "{777E7BDF-C52A-4F6F-A47B-A44ECA73E984}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler.Persistence", "src\Scheduler.Persistence\Scheduler.Persistence.csproj", "{CF60885B-0F28-45D2-BA5C-FDDEF62FDEB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAC9F0CE-C171-4338-8176-3A370605F7CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTest", "tests\IntegrationTest\IntegrationTest.csproj", "{A705E1E5-CD26-443F-90CE-7DD45FCBC1FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function", "function\Function.csproj", "{AB4AFEA9-290A-4778-8CF1-8A66625A4B10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77D75B49-300A-4317-91A4-50D341591036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77D75B49-300A-4317-91A4-50D341591036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77D75B49-300A-4317-91A4-50D341591036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77D75B49-300A-4317-91A4-50D341591036}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6293CC0-FE49-44CB-A63A-D439E3DA0F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6293CC0-FE49-44CB-A63A-D439E3DA0F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6293CC0-FE49-44CB-A63A-D439E3DA0F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6293CC0-FE49-44CB-A63A-D439E3DA0F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777E7BDF-C52A-4F6F-A47B-A44ECA73E984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777E7BDF-C52A-4F6F-A47B-A44ECA73E984}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777E7BDF-C52A-4F6F-A47B-A44ECA73E984}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777E7BDF-C52A-4F6F-A47B-A44ECA73E984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF60885B-0F28-45D2-BA5C-FDDEF62FDEB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF60885B-0F28-45D2-BA5C-FDDEF62FDEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF60885B-0F28-45D2-BA5C-FDDEF62FDEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF60885B-0F28-45D2-BA5C-FDDEF62FDEB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A705E1E5-CD26-443F-90CE-7DD45FCBC1FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A705E1E5-CD26-443F-90CE-7DD45FCBC1FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A705E1E5-CD26-443F-90CE-7DD45FCBC1FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A705E1E5-CD26-443F-90CE-7DD45FCBC1FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4AFEA9-290A-4778-8CF1-8A66625A4B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4AFEA9-290A-4778-8CF1-8A66625A4B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4AFEA9-290A-4778-8CF1-8A66625A4B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4AFEA9-290A-4778-8CF1-8A66625A4B10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77D75B49-300A-4317-91A4-50D341591036} = {FD0F5431-8007-4EFC-972C-FC1BDFA4C7A1}
+		{A6293CC0-FE49-44CB-A63A-D439E3DA0F4F} = {FD0F5431-8007-4EFC-972C-FC1BDFA4C7A1}
+		{777E7BDF-C52A-4F6F-A47B-A44ECA73E984} = {FD0F5431-8007-4EFC-972C-FC1BDFA4C7A1}
+		{CF60885B-0F28-45D2-BA5C-FDDEF62FDEB2} = {FD0F5431-8007-4EFC-972C-FC1BDFA4C7A1}
+		{A705E1E5-CD26-443F-90CE-7DD45FCBC1FA} = {FAC9F0CE-C171-4338-8176-3A370605F7CA}
+	EndGlobalSection
+EndGlobal
